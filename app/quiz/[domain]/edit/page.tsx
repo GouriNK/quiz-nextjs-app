@@ -4,28 +4,13 @@ import { useState } from "react";
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
+import { QuestionType } from "@/app/lib/definitions";
+import { questionArr } from '@/app/lib/placeholder-data';
 
-
-type Option = {
-  label: string;
-  isCorrectAnswer: boolean
-}
-type QuestionType = {
-  id?: string;
-  questionText?: string;
-  options?: Option[];
-  correctAnswer?: Option;
-  explanation?: string;
-  type?: string;
-}
 
 export default  function Page({ params }: { params: { domain: string } }) {
     const domain = params.domain;
-    const [questions, setQuestions] = useState<QuestionType[]>([
-      { id: '1', questionText: 'What is your name?' },
-      { id: '2', questionText: 'What is your age?' },
-      { id: '3', questionText: 'What is your favorite color?' },
-    ]);
+    const [questions, setQuestions] = useState<QuestionType[]>(questionArr);
   
     const handleEdit = (rowData: QuestionType) => {
       // Implement edit functionality here

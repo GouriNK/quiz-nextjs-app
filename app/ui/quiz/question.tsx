@@ -8,19 +8,7 @@ import { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import TestProgress from './test-progress';
 import { clsx } from 'clsx';
 import styles from './question.module.css';
-
-type Option = {
-    label: string;
-    isCorrectAnswer: boolean
-}
-type QuestionType = {
-    id?: string;
-    questionText: string;
-    options: Option[];
-    correctAnswer: Option;
-    explanation: string;
-    type?: string;
-}
+import type { QuestionType, Option } from '@/app/lib/definitions';
 
 export default function Question(
     { questions, setQuizInProgressStatus, setTotalScore }: 
