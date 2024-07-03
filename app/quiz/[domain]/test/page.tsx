@@ -11,7 +11,7 @@ export default function Page({ params }: { params: { domain: string } }) {
 
     useEffect(() => {
       async function fetchQuestions() {
-        const response = await fetch('/api/questions');
+        const response = await fetch(`/api/questions/${domain}`);
         const data = await response.json();
         setQuestionsForDomain(data);
       }

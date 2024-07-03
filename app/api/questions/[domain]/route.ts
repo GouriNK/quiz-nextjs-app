@@ -1,13 +1,16 @@
 import prisma from '@/app/lib/prisma';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET() {
+export const GET = async (
+  req: NextRequest,
+  context: { params: { domain: string } }
+) => {
   try {
     const questions = await prisma.question.findMany({
       where : {
         domain : {
           value : {
-            contains : 'domain1'
+            contains : context.params.domain
           }
         }
       },
