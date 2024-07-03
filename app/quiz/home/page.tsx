@@ -30,7 +30,7 @@ return (
             {domains.map((domain, index) => (
                 <Card key={index} title={domain.label} subTitle={domain.label} style={{ flex: 1 }}>
                     <p>{domain.label}</p>
-                    <Link href={domain.label} className="p-button font-bold">
+                    <Link href={`/quiz/${domain.value}/test`} className="p-button font-bold">
                         {'Go'}
                   </Link>
                 </Card>
