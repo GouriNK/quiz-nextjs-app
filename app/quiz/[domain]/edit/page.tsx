@@ -1,16 +1,25 @@
 'use client'
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { QuestionType } from "@/app/lib/definitions";
-import { questionArr } from '@/app/lib/placeholder-data';
 
 
-export default  function Page({ params }: { params: { domain: string } }) {
+export default function Page({ params }: { params: { domain: string } }) {
     const domain = params.domain;
-    const [questions, setQuestions] = useState<QuestionType[]>(questionArr);
+    const [questions, setQuestions] = useState<QuestionType[]>([]);
+
+    useEffect(() => {
+      async function fetchQuestions() {
+        const response = await fetch('/api/questions');
+        const data = await response.json();
+        setQuestions(data);
+      }
+  
+      fetchQuestions();
+    }, []);
   
     const handleEdit = (rowData: QuestionType) => {
       // Implement edit functionality here

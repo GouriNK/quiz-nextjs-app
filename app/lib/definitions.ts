@@ -1,12 +1,15 @@
-export type Option = {
-    label: string;
-    isCorrectAnswer: boolean
-}
 export type QuestionType = {
     id?: string;
     questionText: string;
-    options: Option[];
-    correctAnswer: Option;
+    options: string[];
+    correctAnswer: string;
     explanation: string;
-    type?: string;
+    domainId?: MasterDataType;
+}
+
+export type MasterDataType = {
+    id: string;
+    type: string;
+    label: string;
+    value: string;
 }
