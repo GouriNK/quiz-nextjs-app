@@ -23,7 +23,7 @@ export default function Page({ params }: { params: { domain: string } }) {
       <div>
         Quiz Test Page {domain}
         <br/>Fetched from DB {questionsForDomain.length}
-        <QuestionSet type={domain}/>
+        <QuestionSet questionsArr={questionsForDomain}/>
         </div>
 
     );
