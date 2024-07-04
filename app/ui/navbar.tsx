@@ -10,9 +10,9 @@ export default function Navbar() {
             url: '/quiz/home'
         },
         {
-            label: 'Edit All Questions',
+            label: 'View All Questions',
             icon: 'pi pi-star',
-             url: '/quiz/all/edit'
+             url: '/quiz/all/view'
         },
         // {
         //     label: 'Projects',

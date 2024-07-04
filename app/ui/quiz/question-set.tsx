@@ -12,7 +12,7 @@ export default function QuestionSet({ questionsArr }: { questionsArr: QuestionTy
             {quizInProgressStatus && (
                 
                 <>
-                               <Question questions={questionsArr} setQuizInProgressStatus={setQuizInProgressStatus} setTotalScore={setTotalScore} />
+                    <Question questions={questionsArr} setQuizInProgressStatus={setQuizInProgressStatus} setTotalScore={setTotalScore} />
                 </>
                 
             )}

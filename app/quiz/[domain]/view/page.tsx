@@ -5,9 +5,12 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Button } from 'primereact/button';
 import { QuestionType } from "@/app/lib/definitions";
-
+import { useRouter } from 'next/navigation'
+import Link from "next/link";
 
 export default function Page({ params }: { params: { domain: string } }) {
+  const router = useRouter()
+
     const domain = params.domain;
     const [questions, setQuestions] = useState<QuestionType[]>([]);
 
@@ -24,6 +27,7 @@ export default function Page({ params }: { params: { domain: string } }) {
     const handleEdit = (rowData: QuestionType) => {
       // Implement edit functionality here
       console.log('Edit:', rowData);
+      router.push(`/quiz/question/${rowData.id}/edit`) // Navigate to the new post page
     };
   
     const handleDelete = (rowData: QuestionType) => {
@@ -53,6 +57,9 @@ export default function Page({ params }: { params: { domain: string } }) {
 
     return (
       <div style={{ margin: '40px auto', width: '1000px'}}>
+        <Link href={`/quiz/question/create`} className="p-button font-bold">
+                        {'Create a new Question'}
+                  </Link>
         <DataTable value={questions} responsiveLayout="scroll">
           <Column field="questionText" header="Question"></Column>
           <Column body={actionTemplate} header="Actions" style={{ textAlign: 'center', width: '8em' }}></Column>
