@@ -1,6 +1,15 @@
+'use client';
+
+import QuestionForm from "@/app/ui/quiz/question-form";
+
 export default function Page() {
+
+  const handleSubmit = (formData: FormData) => {
+    console.log('Thsi is form data :', formData);
+  };
+
     return (
-      <div>Question Create Page</div>
+      <QuestionForm question={null} action={handleSubmit}/>
     );
   }
   

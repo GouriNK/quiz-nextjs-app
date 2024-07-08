@@ -1,7 +1,7 @@
 export type QuestionType = {
     id?: string;
     questionText: string;
-    options: string[];
+    options?: string[];
     correctAnswer: string;
     explanation: string;
     domainId?: MasterDataType;
