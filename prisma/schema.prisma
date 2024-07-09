@@ -16,11 +16,11 @@ model MasterData {
 }
 
 model Question {
-  id            String   @id @default(auto()) @map("_id") @db.ObjectId
-  correctAnswer String
-  domainId      String    @db.ObjectId
+  id            String        @id @default(auto()) @map("_id") @db.ObjectId
   explanation   String
-  options       String[]
+  options       Json
+  correctAnswer Json
   questionText  String
-  domain        MasterData   @relation(fields: [domainId], references: [id])
+  domainId      String        @db.ObjectId
+  domain        MasterData    @relation(fields: [domainId], references: [id])
 }

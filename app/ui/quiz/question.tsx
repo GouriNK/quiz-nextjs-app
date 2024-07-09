@@ -7,7 +7,7 @@ import { useState, Dispatch, SetStateAction } from 'react';
 import TestProgress from './test-progress';
 import { clsx } from 'clsx';
 import styles from './question.module.css';
-import type { QuestionType } from '@/app/lib/definitions';
+import type { OptionType, QuestionType } from '@/app/lib/definitions';
 
 export default function Question(
     { questions, setQuizInProgressStatus, setTotalScore }: 
@@ -15,7 +15,7 @@ export default function Question(
             setQuizInProgressStatus: Dispatch<SetStateAction<boolean>>,  
             setTotalScore: Dispatch<SetStateAction<number>>
     }) {
-    const [selectedOption, setSelectedOption] = useState<string | null>(null);
+    const [selectedOption, setSelectedOption] = useState<OptionType | null>(null);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [showAnswerButton, setShowAnswerButton] = useState(true);
 
@@ -26,7 +26,7 @@ export default function Question(
     const handleNextClick = () => {
         console.log('Selected Option:', selectedOption);
         // check option and score
-        if(selectedOption === questions[currentQuestionIndex].correctAnswer) {
+        if(selectedOption?.text === questions[currentQuestionIndex].correctAnswer.text) {
             setTotalScore(prevTotalScore => { return prevTotalScore+1 });
         }
         setSelectedOption(null);
@@ -53,7 +53,7 @@ export default function Question(
         <div style={{ display: 'flex', justifyContent: 'center', padding: '20px' }}>
             <Card title={questions[currentQuestionIndex]?.questionText}>
                 <div>
-                    {questions[currentQuestionIndex]?.options.map((option, index) => (
+                    {questions[currentQuestionIndex]?.options?.map((option, index) => (
                         <div key={index} className="p-field-radiobutton" style={{ marginBottom: '10px' }}>
                             <RadioButton
                                 inputId={`option${index}`}
@@ -65,10 +65,10 @@ export default function Question(
                             />
                             <label htmlFor={`option${index}`} style={{ marginLeft: '8px' }}
                                 className={clsx({
-                                    [styles.correctAnswer]: option === questions[currentQuestionIndex].correctAnswer && !showAnswerButton
+                                    [styles.correctAnswer]: option.text === questions[currentQuestionIndex].correctAnswer.text && !showAnswerButton
                                 })}
                             >
-                                {option}
+                                {option.text}
                             </label>
                         </div>
                     ))}

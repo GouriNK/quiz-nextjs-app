@@ -6,13 +6,6 @@ import { useState, useEffect } from 'react';
 import { MasterDataType } from '@/app/lib/definitions';
 
 export default function Home() {
-//   const cardData = [
-//     { title: 'Card 1', subTitle: 'Subheading 1', content: 'Content for card 1', buttonLabel: 'Action 1', link: `/quiz/1/test` },
-//     { title: 'Card 2', subTitle: 'Subheading 2', content: 'Content for card 2', buttonLabel: 'Action 2', link: `/quiz/2/test` },
-//     { title: 'Card 3', subTitle: 'Subheading 3', content: 'Content for card 3', buttonLabel: 'Action 3', link: `/quiz/3/test` },
-//     { title: 'Card 4', subTitle: 'Subheading 4', content: 'Content for card 4', buttonLabel: 'Action 4', link: `/quiz/all/test` },
-// ];
-
 const [domains, setDomains] = useState<MasterDataType[]>([]);
 
 useEffect(() => {
