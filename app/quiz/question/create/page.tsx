@@ -2,7 +2,6 @@
 
 import { QuestionType } from "@/app/lib/definitions";
 import QuestionForm from "@/app/ui/quiz/question-form";
-import { revalidatePath } from "next/cache";
 import { useRouter } from "next/navigation";
 
 export default function Page() {
