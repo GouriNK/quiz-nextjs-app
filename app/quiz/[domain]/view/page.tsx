@@ -24,18 +24,6 @@ export default function Page({ params }: { params: { domain: string } }) {
       fetchQuestions();
     }, []);
   
-    const handleEdit = (rowData: QuestionType) => {
-      // Implement edit functionality here
-      console.log('Edit:', rowData);
-      // router.push(`/quiz/question/${rowData.id}/edit`) // Navigate to the new post page
-    //   router.push(
-    //     pathname: `/quiz/question/${rowData.id}/edit`,
-    //     query: rowData,
-    //   ,
-    //   `/quiz/question/${rowData.id}/edit` // use this to clear query strings like key value from URL
-    // );
-    };
-  
     const handleDelete = (rowData: QuestionType) => {
       // Implement delete functionality here
       console.log('Delete:', rowData);
@@ -45,20 +33,9 @@ export default function Page({ params }: { params: { domain: string } }) {
     const actionTemplate = (rowData: QuestionType) => {
       return (
         <>
-          <Button
-            label="Edit"
-            icon="pi pi-pencil"
-            className="p-button-rounded p-button-success p-mr-2"
-            onClick={() => handleEdit(rowData)}
-          />
-          {/* <Link 
-            href={{
-              pathname: `/quiz/question/${rowData.id}/edit`,
-              query: {value : rowData }
-            }}
-            className="p-button-rounded p-button-success p-mr-2">
+          <Link href={`/quiz/question/${rowData.id}/edit`} className="p-button-rounded p-button-success p-mr-2">
              Edit
-          </Link> */}
+          </Link>
           <Button
             label="Delete"
             icon="pi pi-trash"

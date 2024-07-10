@@ -11,11 +11,11 @@ export type OptionType = {
 }
 
 export type QuestionType = {
-    id: string;
+    id?: string;
     questionText: string;
     explanation: string;
     correctAnswer: OptionType;
     options: [OptionType, OptionType, OptionType, OptionType];
     domainId: string;
-    domain: MasterDataType;
+    domain?: MasterDataType;
 }

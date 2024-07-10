@@ -1,6 +1,6 @@
 'use client';
 
-import { MasterDataType, QuestionType } from "@/app/lib/definitions";
+import { MasterDataType, OptionType, QuestionType } from "@/app/lib/definitions";
 import { useEffect, useRef, useState } from "react";
 import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
@@ -8,31 +8,12 @@ import { RadioButton } from 'primereact/radiobutton';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 
-interface AnswerOption {
-    text: string;
-    correct: boolean;
-}
-
-interface QuestionFormData {
-    questionText: string;
-    explanation: string,
-    correctAnswer: AnswerOption | null,
-    optionArr : [AnswerOption, AnswerOption, AnswerOption, AnswerOption],
-    domainId: string;
-}
-
-export default function QuestionForm({ question, action }: { question: QuestionType | null; action : (formData: any) => void; }) {
+export default function QuestionForm({ question, action }: { question: QuestionType; action : (formData: any) => void; }) {
 
     const [submitted, setSubmitted] = useState(false);
     const [domains, setDomains] = useState<MasterDataType[]>([]);
     const toast = useRef<Toast>(null);
-    const [formData, setFormData] = useState<QuestionFormData>({
-        questionText: '',
-        explanation: '',
-        correctAnswer: {text: '', correct: true},
-        domainId: '',
-        optionArr : [{text: '', correct: false}, {text: '', correct: false}, {text: '', correct: false}, {text: '', correct: false}]
-    });
+    const [formData, setFormData] = useState<QuestionType>(question);
     
 
     useEffect(() => {
@@ -62,17 +43,17 @@ export default function QuestionForm({ question, action }: { question: QuestionT
     };
 
     const handleOptionChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, index: number, field: string) => {
-        const newOptionArr = [...formData.optionArr] as [AnswerOption, AnswerOption, AnswerOption, AnswerOption];
+        const newOptionArr = [...formData.options] as [OptionType, OptionType, OptionType, OptionType];
         newOptionArr[index] = { ...newOptionArr[index], [field]: e.target.value };
-        setFormData({ ...formData, optionArr: newOptionArr });
+        setFormData({ ...formData, options: newOptionArr });
     }
 
     const handleRadioChange = (index: number) => {
-        const newOptionArr = formData.optionArr.map((item, i) => ({
+        const newOptionArr = formData.options.map((item, i) => ({
           ...item,
-          correct: i === index,
-        })) as [AnswerOption, AnswerOption, AnswerOption, AnswerOption];
-        setFormData({ ...formData, optionArr: newOptionArr, correctAnswer : newOptionArr[index]});
+          isCorrect: i === index,
+        })) as [OptionType, OptionType, OptionType, OptionType];
+        setFormData({ ...formData, options: newOptionArr, correctAnswer : newOptionArr[index]});
       };
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -93,7 +74,7 @@ export default function QuestionForm({ question, action }: { question: QuestionT
                     <label htmlFor="explanation">Explanation</label>
                     <InputText id="explanation" value={formData.explanation} onChange={(e) => handleInputTextChange(e, 'explanation')} />
                 </div>
-                {formData.optionArr.map((option, i) =>
+                {formData.options.map((option, i) =>
                     <div key={i} className="p-field-radiobutton" style={{ margin: '20px' }}>
                         <div className="p-field" style={{ margin: '20px' }}>
                             <label htmlFor="option">Option {i+1}</label>
@@ -102,9 +83,9 @@ export default function QuestionForm({ question, action }: { question: QuestionT
                         <RadioButton
                             inputId={`option${i}`}
                             name="correctOption"
-                            value={option.correct}
+                            value={option.isCorrect}
                             onChange={() => handleRadioChange(i)}
-                            checked={option.correct}
+                            checked={option.isCorrect}
                         />
                         <hr/>
                     </div>
