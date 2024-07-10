@@ -24,10 +24,24 @@ export default function Page({ params }: { params: { domain: string } }) {
       fetchQuestions();
     }, []);
   
-    const handleDelete = (rowData: QuestionType) => {
+    const handleDelete = async (rowData: QuestionType) => {
       // Implement delete functionality here
-      console.log('Delete:', rowData);
-      setQuestions(questions.filter(question => question.id !== rowData.id));
+      const confirmed = window.confirm('Are you sure you want to delete this question?');
+      if (confirmed) {
+        const response = await fetch('/api/questions/delete', {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ id : rowData.id }),
+        });
+        if (response.ok) {
+          console.log('Question deleted successfully');
+          setQuestions(questions.filter(question => question.id !== rowData.id));
+        } else {
+          console.error('Failed to delete question');
+        }
+      }
     };
   
     const actionTemplate = (rowData: QuestionType) => {
