@@ -54,9 +54,11 @@ export default function QuestionForm({ question, action }: { question: QuestionT
           isCorrect: i === index,
         })) as [OptionType, OptionType, OptionType, OptionType];
         setFormData({ ...formData, options: newOptionArr, correctAnswer : newOptionArr[index]});
+        console.log(newOptionArr);
       };
 
     const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
         console.log(JSON.stringify(formData));
         setSubmitted(true);
         action(formData);
@@ -77,12 +79,12 @@ export default function QuestionForm({ question, action }: { question: QuestionT
                 {formData.options.map((option, i) =>
                     <div key={i} className="p-field-radiobutton" style={{ margin: '20px' }}>
                         <div className="p-field" style={{ margin: '20px' }}>
-                            <label htmlFor="option">Option {i+1}</label>
-                            <InputText id="option" value={option.text} onChange={(e) => handleOptionChange(e, i, 'text')} />
+                            <label htmlFor={`optionText${i}`}>Option {i+1}</label>
+                            <InputText id={`optionText${i}`} value={option.text} onChange={(e) => handleOptionChange(e, i, 'text')} />
                         </div>
                         <RadioButton
                             inputId={`option${i}`}
-                            name="correctOption"
+                            name="answerOptions"
                             value={option.isCorrect}
                             onChange={() => handleRadioChange(i)}
                             checked={option.isCorrect}
@@ -91,7 +93,7 @@ export default function QuestionForm({ question, action }: { question: QuestionT
                     </div>
                 )}
                 <div className="p-field" style={{ margin: '20px' }}>
-                    <label htmlFor="domain">Domain</label>
+                    <label>Domain</label>
                     <Dropdown id="domain" value={formData.domainId} options={domains} optionValue={'id'} optionLabel={'label'} onChange={handleDomainChange} placeholder="Select a Domain" />
                 </div>
                 <div className="p-field" style={{ margin: '20px' }}>

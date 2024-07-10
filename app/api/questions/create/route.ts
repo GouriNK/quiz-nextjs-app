@@ -1,25 +1,28 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
+import { NextRequest, NextResponse } from 'next/server';
 import prisma from '../../../lib/prisma'
 
-// POST /api/post
-// Required fields in body: title, authorEmail
-// Optional fields in body: content
-export const POST = async (
-    req: NextApiRequest,
-    res: NextApiResponse,
-  ) => {
-  const { questionText, options, explanation, correctAnswer, domainId } = req.body
-  const result = await prisma.question.create({
-    data: {
-        correctAnswer: correctAnswer,
-        domainId: domainId,
-        explanation: explanation,
-        options : options,
-        questionText : questionText,
-        domain : { connect: { id: domainId } }
-    },
-  })
-  return res.status(201).json(result)
+export async function POST(request: NextRequest) {
+  try {
+    console.log('----------------');
+    const body = await request.json();
+    const { explanation, options, correctAnswer, questionText, domainId } = body;
+    console.log(body);
+    const question = await prisma.question.create({
+      data: {
+        explanation,
+        options,
+        correctAnswer,
+        questionText,
+        domain: {
+          connect: { id: domainId },
+        },
+      },
+    });
+    return NextResponse.json(question, { status: 201 });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ error: 'Failed to create question' }, { status: 500 });
+  }
 }
 
 

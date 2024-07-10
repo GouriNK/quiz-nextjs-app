@@ -2,8 +2,12 @@
 
 import { QuestionType } from "@/app/lib/definitions";
 import QuestionForm from "@/app/ui/quiz/question-form";
+import { revalidatePath } from "next/cache";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
+
+  const router = useRouter(); // Use the useRouter hook
   const newQuestion : QuestionType = {
     questionText: '',
     explanation: '',
@@ -12,8 +16,25 @@ export default function Page() {
     options : [{text: '', isCorrect: false}, {text: '', isCorrect: false}, {text: '', isCorrect: false}, {text: '', isCorrect: false}]
 }
 
-  const handleSubmit = (formData: FormData) => {
-    console.log('Thsi is form data :', formData);
+  const handleSubmit = async (formData: FormData) => {
+    // console.log('calling handle submit');
+    // console.log('This is form data :', formData);
+    // console.log(JSON.stringify(formData));
+    const response = await fetch('/api/questions/create', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+    console.log(response);
+    if (response.ok) {
+      console.log(response);
+      console.log('Question created successfully');
+      router.push('/quiz/all/view');
+    } else {
+      console.error('Failed to create question');
+    }
   };
 
     return (
