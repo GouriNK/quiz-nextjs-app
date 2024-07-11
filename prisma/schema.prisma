@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model MasterData {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  label String
+  type  String
+  value String
+  questions Question[]
+}
+
+model Question {
+  id            String        @id @default(auto()) @map("_id") @db.ObjectId
+  explanation   String
+  options       Json
+  correctAnswer Json
+  questionText  String
+  domainId      String        @db.ObjectId
+  domain        MasterData    @relation(fields: [domainId], references: [id])
+}
