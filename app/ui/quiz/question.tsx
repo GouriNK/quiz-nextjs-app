@@ -65,7 +65,7 @@ export default function Question(
                             />
                             <label htmlFor={`option${index}`} style={{ marginLeft: '8px' }}
                                 className={clsx({
-                                    [styles.correctAnswer]: option.text === questions[currentQuestionIndex].correctAnswer.text && !showAnswerButton
+                                    [styles.correctAnswer]: option.isCorrect && !showAnswerButton
                                 })}
                             >
                                 {option.text}
