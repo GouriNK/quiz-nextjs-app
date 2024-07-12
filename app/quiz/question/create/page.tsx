@@ -1,7 +1,7 @@
 'use client';
 
+import QuestionForm from "@/app/components/quiz/question-form";
 import { QuestionType } from "@/app/lib/definitions";
-import QuestionForm from "@/app/ui/quiz/question-form";
 import { useRouter } from "next/navigation";
 
 export default function Page() {

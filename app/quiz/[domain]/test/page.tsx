@@ -1,7 +1,7 @@
 'use client'
 
+import QuestionSet from "@/app/components/quiz/question-set";
 import { QuestionType } from "@/app/lib/definitions";
-import QuestionSet from "@/app/ui/quiz/question-set";
 import { useEffect, useState } from "react";
 
 export default function Page({ params }: { params: { domain: string } }) {
