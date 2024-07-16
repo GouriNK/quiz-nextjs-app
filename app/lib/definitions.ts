@@ -19,3 +19,10 @@ export type QuestionType = {
     domainId: string;
     domain?: MasterDataType;
 }
+
+export type UserType = {
+    id?: string;
+    username: string;
+    password: string;
+    role: string;
+}
