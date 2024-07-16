@@ -24,3 +24,10 @@ model Question {
   domainId      String        @db.ObjectId
   domain        MasterData    @relation(fields: [domainId], references: [id])
 }
+
+model User {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  password String
+  role     String
+  username String
+}
