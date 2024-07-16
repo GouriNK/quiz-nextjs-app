@@ -3,6 +3,11 @@ import { Menubar } from 'primereact/menubar';
 import { MenuItem } from 'primereact/menuitem';
 
 export default function Navbar() {
+
+    const signOut = () => {
+        console.log('Logout here!');
+    }
+
     const items: MenuItem[] = [
         {
             label: 'Home',
@@ -13,6 +18,13 @@ export default function Navbar() {
             label: 'View All Questions',
             icon: 'pi pi-star',
              url: '/quiz/all/view'
+        },
+        {
+            label: 'Logout',
+            icon: 'pi pi-star',
+            command: () => {
+                signOut();
+            }
         },
         // {
         //     label: 'Projects',

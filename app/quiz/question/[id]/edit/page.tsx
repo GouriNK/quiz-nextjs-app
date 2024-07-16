@@ -1,9 +1,9 @@
 'use client';
  
 import { QuestionType } from "@/app/lib/definitions";
-import QuestionForm from "@/app/ui/quiz/question-form";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import QuestionForm from "@/app/components/quiz/question-form";
 
 export default function Page({ params }: { params: { id: string } }) {
   
