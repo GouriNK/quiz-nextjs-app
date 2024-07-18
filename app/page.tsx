@@ -13,6 +13,7 @@ export default function Home() {
     <main className={styles.main}>
       {/* {JSON.stringify(data)} */}
       {/* {JSON.stringify(status)} */}
+      {JSON.stringify(session)}
       {!session?.user?.name &&
         <Link href="/api/auth/signin" className="p-button font-bold">
             Login

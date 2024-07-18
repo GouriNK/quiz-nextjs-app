@@ -7,10 +7,17 @@ import { Button } from 'primereact/button';
 import { QuestionType } from "@/app/lib/definitions";
 import { useRouter } from 'next/navigation'
 import Link from "next/link";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
+
 
 export default function Page({ params }: { params: { domain: string } }) {
-  const router = useRouter()
 
+    const  {data:session} = useSession();
+    if(!session) {
+      redirect('/api/auth/signin');
+    }
+    const router = useRouter()
     const domain = params.domain;
     const [questions, setQuestions] = useState<QuestionType[]>([]);
 
