@@ -8,14 +8,21 @@ import { useSession } from "next-auth/react"; // client component approach
 
 export default function Home() {
   // const data = await getServerSession(authOptions); // server component approach
-  const  {data, status} = useSession(); // client component approach
+  const  {data:session} = useSession(); // client component approach
   return (
     <main className={styles.main}>
-      {JSON.stringify(data)}
-      {JSON.stringify(status)}
+      {/* {JSON.stringify(data)} */}
+      {/* {JSON.stringify(status)} */}
+      {!session?.user?.name &&
+        <Link href="/api/auth/signin" className="p-button font-bold">
+            Login
+        </Link>
+      }
+      {session?.user?.name &&
       <Link href="/quiz/home" className="p-button font-bold">
           Get started
       </Link>
+      }
     </main>
   );
 }

@@ -1,12 +1,22 @@
 'use client'
 import { Menubar } from 'primereact/menubar';
 import { MenuItem } from 'primereact/menuitem';
+import { signIn, signOut, useSession } from "next-auth/react"; // client component approach
 
 export default function Navbar() {
 
-    const signOut = () => {
+    const signOutOfApp = () => {
         console.log('Logout here!');
+        signOut();
     }
+
+    const signIntoApp = () => {
+        console.log('Logout here!');
+        signIn();
+    }
+
+    const  {data:session} = useSession(); // client component approach
+
 
     const items: MenuItem[] = [
         {
@@ -17,13 +27,23 @@ export default function Navbar() {
         {
             label: 'View All Questions',
             icon: 'pi pi-star',
+            visible: session?.user?.name  ? true : false,
              url: '/quiz/all/view'
         },
         {
             label: 'Logout',
             icon: 'pi pi-star',
+            visible: session?.user?.name  ? true : false,
             command: () => {
-                signOut();
+                signOutOfApp();
+            }
+        },
+        {
+            label: 'Login',
+            icon: 'pi pi-star',
+            visible: session?.user?.name  ? false : true,
+            command: () => {
+                signIntoApp();
             }
         },
         // {
