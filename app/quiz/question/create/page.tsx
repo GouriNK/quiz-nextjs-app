@@ -3,17 +3,31 @@
 import QuestionForm from "@/app/components/quiz/question-form";
 import { QuestionType } from "@/app/lib/definitions";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { useEffect } from "react";
 
 export default function Page() {
-
+  const { data: session, status } = useSession();
   const router = useRouter(); // Use the useRouter hook
-  const newQuestion : QuestionType = {
+
+  useEffect(() => {
+    if (status === "loading") return; // Do nothing while loading
+    if (status === "unauthenticated") {
+      router.push('/api/auth/signin');
+    }
+  }, [status, router]);
+
+  const newQuestion: QuestionType = {
     questionText: '',
     explanation: '',
-    correctAnswer: {text: '', isCorrect: true},
+    correctAnswer: { text: '', isCorrect: true },
     domainId: '',
-    options : [{text: '', isCorrect: false}, {text: '', isCorrect: false}, {text: '', isCorrect: false}, {text: '', isCorrect: false}]
-}
+    options: [{ text: '', isCorrect: false }, { text: '', isCorrect: false }, { text: '', isCorrect: false }, { text: '', isCorrect: false }]
+  }
+
+  if(!session) {
+    return null;
+  }
 
   const handleSubmit = async (formData: FormData) => {
     // console.log('calling handle submit');
@@ -36,8 +50,7 @@ export default function Page() {
     }
   };
 
-    return (
-      <QuestionForm question={newQuestion} action={handleSubmit}/>
-    );
-  }
-  
+  return (
+    <QuestionForm question={newQuestion} action={handleSubmit} />
+  );
+}

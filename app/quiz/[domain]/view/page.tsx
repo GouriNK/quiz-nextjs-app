@@ -13,15 +13,16 @@ import { redirect } from "next/navigation";
 
 export default function Page({ params }: { params: { domain: string } }) {
 
-    const  {data:session} = useSession();
-    if(!session) {
-      redirect('/api/auth/signin');
-    }
-    const router = useRouter()
+    const { data: session, status } = useSession();
+    const router = useRouter();
     const domain = params.domain;
     const [questions, setQuestions] = useState<QuestionType[]>([]);
 
     useEffect(() => {
+      if (status === "unauthenticated") {
+        router.push('/api/auth/signin');
+      }
+
       async function fetchQuestions() {
         const response = await fetch('/api/questions');
         const data = await response.json();
@@ -29,7 +30,11 @@ export default function Page({ params }: { params: { domain: string } }) {
       }
   
       fetchQuestions();
-    }, []);
+    }, [status, router]);
+
+    if(!session) {
+      return null;
+    }
   
     const handleDelete = async (rowData: QuestionType) => {
       // Implement delete functionality here
