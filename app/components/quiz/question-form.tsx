@@ -1,5 +1,3 @@
-'use client';
-
 import { MasterDataType, OptionType, QuestionType } from "@/app/lib/definitions";
 import { useEffect, useRef, useState } from "react";
 import { InputText } from 'primereact/inputtext';
@@ -8,30 +6,25 @@ import { RadioButton } from 'primereact/radiobutton';
 import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 
-export default function QuestionForm({ question, action }: { question: QuestionType; action : (formData: any) => void; }) {
+export default async function QuestionForm({ question, action }: { question: QuestionType; action : (formData: any) => void; }) {
 
     const [submitted, setSubmitted] = useState(false);
-    const [domains, setDomains] = useState<MasterDataType[]>([]);
+    // const [domains, setDomains] = useState<MasterDataType[]>([]);
     const toast = useRef<Toast>(null);
     const [formData, setFormData] = useState<QuestionType>(question);
     
 
-    useEffect(() => {
-        async function fetchDomains() {
-            const response = await fetch('/api/masterdata/domains');
-            const data = await response.json();
-            setDomains(data);
-        }
-        fetchDomains();
-    }, []);
+    const response = await fetch('/api/masterdata/domains');
+    const domains = await response.json();
 
-    useEffect(() => {
-        if (question) {
-          console.log(question);
-        } else {
-            console.log('create form')
-        }
-      }, [question]);
+    // useEffect(() => {
+    //     async function fetchDomains() {
+    //         const response = await fetch('/api/masterdata/domains');
+    //         const data = await response.json();
+    //         setDomains(data);
+    //     }
+    //     fetchDomains();
+    // }, []);
 
     const handleDomainChange = (e: { value: string }) => {
         setFormData({ ...formData, domainId: e.value });
