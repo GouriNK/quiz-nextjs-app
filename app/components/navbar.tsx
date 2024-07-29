@@ -2,6 +2,7 @@
 import { Menubar } from 'primereact/menubar';
 import { MenuItem } from 'primereact/menuitem';
 import { signIn, signOut, useSession } from "next-auth/react"; // client component approach
+import router from 'next/router';
 
 export default function Navbar() {
 
@@ -12,28 +13,44 @@ export default function Navbar() {
 
     const signIntoApp = () => {
         console.log('Logout here!');
+        if (session) router.reload();
         signIn();
     }
 
-    const  {data:session} = useSession(); // client component approach
-
+    // const  {data:session} = useSession(); // client component approach
+    const { data: session, status } = useSession();
 
     const items: MenuItem[] = [
         {
             label: 'Home',
+            icon: 'pi pi-home',
+            url: '/'
+        },
+        // {
+        //     label: JSON.stringify(session),
+        //     icon: 'pi pi-home',
+        //     url: '/'
+        // },
+        // {
+        //     label: JSON.stringify(status),
+        //     icon: 'pi pi-home',
+        //     url: '/'
+        // },
+        {
+            label: 'Quiz Domains',
             icon: 'pi pi-home',
             url: '/quiz/home'
         },
         {
             label: 'View All Questions',
             icon: 'pi pi-star',
-            visible: session?.user?.name  ? true : false,
+            visible: status === "authenticated"  ? true : false,
              url: '/quiz/all/view'
         },
         {
             label: 'Logout',
             icon: 'pi pi-star',
-            visible: session?.user?.name  ? true : false,
+            visible: status === "authenticated"  ? true : false,
             command: () => {
                 signOutOfApp();
             }
@@ -41,7 +58,7 @@ export default function Navbar() {
         {
             label: 'Login',
             icon: 'pi pi-star',
-            visible: session?.user?.name  ? false : true,
+            visible: status === "unauthenticated"  ? true : false,
             command: () => {
                 signIntoApp();
             }

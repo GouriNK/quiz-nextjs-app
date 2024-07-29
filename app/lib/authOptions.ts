@@ -41,5 +41,20 @@ export const authOptions: NextAuthOptions = {
         }),
     ],
     secret : process.env.NEXTAUTH_SECRET,
-        
+    pages: {
+        error: '/auth/login-error',
+        signIn: '/auth/login',
+        signOut: '/quiz/home',  // Redirect to after sign out
+    },
+    callbacks: {
+        async signIn({ user, account, profile }) {
+            if (user) {
+                console.log('---- LOGIN -----');
+                return true;
+            } else {
+                console.log('---- LOGIN ERROR -----');
+                return '/auth/login-error'; // Redirect on login failure
+            }
+        }
+    }
 };
