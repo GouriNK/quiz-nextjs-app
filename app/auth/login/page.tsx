@@ -32,10 +32,9 @@ export default function LoginPage() {
 
 
         if (response.ok ) {
-            // console.error('Login success:', response);
             router.push(response.url);
         } else {
-            // console.error('Login failed:', response);
+            console.log('Login failed:', response);
             router.push(response.url); 
         }
     };

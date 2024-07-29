@@ -55,6 +55,10 @@ export const authOptions: NextAuthOptions = {
                 console.log('---- LOGIN ERROR -----');
                 return '/auth/login-error'; // Redirect on login failure
             }
-        }
+        },
+        async redirect({ url, baseUrl }) {
+            // Redirect users to /quiz/home after successful login
+            return '/quiz/home';
+        },
     }
 };
