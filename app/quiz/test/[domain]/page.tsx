@@ -1,6 +1,6 @@
 'use client'
 
-import QuestionSet from "@/app/components/quiz/question-set";
+import Quiz from "@/app/components/quiz/Quiz";
 import { QuestionType } from "@/app/lib/definitions";
 import { useEffect, useState } from "react";
 
@@ -23,7 +23,7 @@ export default function Page({ params }: { params: { domain: string } }) {
       <div>
         Quiz Test Page {domain}
         <br/>Fetched from DB {questionsForDomain.length}
-        <QuestionSet questionsArr={questionsForDomain}/>
+        <Quiz questionsArr={questionsForDomain}/>
         </div>
 
     );

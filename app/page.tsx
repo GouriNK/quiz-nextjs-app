@@ -23,7 +23,7 @@ export default function Home() {
         </Link>
       }
       {session?.user?.name &&
-      <Link href="/quiz/home" className="p-button font-bold">
+      <Link href="/quiz" className="p-button font-bold">
           Get started
       </Link>
       }

@@ -23,20 +23,12 @@ return (
             {domains.map((domain, index) => (
                 <Card key={index} title={domain.label} subTitle={domain.label} style={{ flex: 1 }}>
                     <p>{domain.label}</p>
-                    <Link href={`/quiz/${domain.value}/test`} className="p-button font-bold">
+                    <Link href={`/quiz/test/${domain.value}`} className="p-button font-bold">
                         {'Go'}
                   </Link>
                 </Card>
             ))}
         </div>
-        {/* <div style={{ display: 'flex' }}>
-            <Card title={cardData[3].title} subTitle={cardData[3].subTitle} style={{ flex: 1 }}>
-                <p>{cardData[3].content}</p>
-                <Link href={cardData[3].link} className="p-button font-bold">
-                        {cardData[3].buttonLabel}
-                  </Link>
-            </Card>
-        </div> */}
     </div>
 );
   }

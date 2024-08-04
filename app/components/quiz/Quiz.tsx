@@ -1,9 +1,9 @@
 'use client';
 import { useState } from "react";
-import Question from "./question";
 import { QuestionType } from "@/app/lib/definitions";
+import QuestionCard from "../question/QuestionCard";
 
-export default function QuestionSet({ questionsArr }: { questionsArr: QuestionType[]}) {
+export default function Quiz({ questionsArr }: { questionsArr: QuestionType[]}) {
  
     const [totalScore, setTotalScore] = useState(0);
     const [quizInProgressStatus, setQuizInProgressStatus] = useState(true);
@@ -12,7 +12,7 @@ export default function QuestionSet({ questionsArr }: { questionsArr: QuestionTy
             {quizInProgressStatus && (
                 
                 <>
-                    <Question questions={questionsArr} setQuizInProgressStatus={setQuizInProgressStatus} setTotalScore={setTotalScore} />
+                    <QuestionCard questions={questionsArr} setQuizInProgressStatus={setQuizInProgressStatus} setTotalScore={setTotalScore} />
                 </>
                 
             )}

@@ -4,12 +4,12 @@ import { Card } from 'primereact/card';
 import { RadioButton, RadioButtonChangeEvent } from 'primereact/radiobutton';
 import { Button } from 'primereact/button';
 import { useState, Dispatch, SetStateAction } from 'react';
-import TestProgress from './test-progress';
 import { clsx } from 'clsx';
 import styles from './question.module.css';
 import type { OptionType, QuestionType } from '@/app/lib/definitions';
+import QuizProgress from '../quiz/QuizProgress';
 
-export default function Question(
+export default function QuestionCard(
     { questions, setQuizInProgressStatus, setTotalScore }: 
         {   questions: QuestionType[], 
             setQuizInProgressStatus: Dispatch<SetStateAction<boolean>>,  
@@ -49,7 +49,7 @@ export default function Question(
 
     return (
         <>
-        <TestProgress part={currentQuestionIndex+1} whole={questions.length} />
+        <QuizProgress part={currentQuestionIndex+1} whole={questions.length} />
         <div style={{ display: 'flex', justifyContent: 'center', padding: '20px' }}>
             <Card title={questions[currentQuestionIndex]?.questionText}>
                 <div>

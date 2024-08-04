@@ -2,9 +2,14 @@
 import { Menubar } from 'primereact/menubar';
 import { MenuItem } from 'primereact/menuitem';
 import { signIn, signOut, useSession } from "next-auth/react"; // client component approach
-import router from 'next/router';
+import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import './Navbar.module.css'; 
 
 export default function Navbar() {
+
+    const pathname = usePathname();
+    const [activePath, setActivePath] = useState('');
 
     const signOutOfApp = () => {
         console.log('Logout here!');
@@ -13,9 +18,12 @@ export default function Navbar() {
 
     const signIntoApp = () => {
         console.log('Logout here!');
-        if (session) router.reload();
         signIn();
     }
+
+    useEffect(() => {
+        setActivePath(pathname);
+    }, [pathname]);
 
     // const  {data:session} = useSession(); // client component approach
     const { data: session, status } = useSession();
@@ -24,7 +32,8 @@ export default function Navbar() {
         {
             label: 'Home',
             icon: 'pi pi-home',
-            url: '/'
+            url: '/',
+            className: activePath === '/' ? 'active-menuitem' : ''
         },
         // {
         //     label: JSON.stringify(session),
@@ -39,13 +48,15 @@ export default function Navbar() {
         {
             label: 'Quiz Domains',
             icon: 'pi pi-home',
-            url: '/quiz/home'
+            url: '/quiz',
+            className: activePath === '/quiz' ? 'active-menuitem' : ''
         },
         {
             label: 'View All Questions',
             icon: 'pi pi-star',
             visible: status === "authenticated"  ? true : false,
-             url: '/quiz/all/view'
+            url: '/question/view/all',
+            className: activePath === '/question/view/all' ? 'active-menuitem' : ''
         },
         {
             label: 'Logout',

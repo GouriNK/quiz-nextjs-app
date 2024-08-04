@@ -4,7 +4,7 @@ import { QuestionType } from "@/app/lib/definitions";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import QuestionForm from "@/app/components/quiz/question-form";
+import QuestionForm from "@/app/components/question/QuestionForm";
 
 export default function Page({ params }: { params: { id: string } }) {
 
@@ -43,7 +43,7 @@ export default function Page({ params }: { params: { id: string } }) {
     });
 
     if (response.ok) {
-      router.push('/quiz/all/view');
+      router.push('/question/view/all');
     } else {
       console.error('Failed to update question');
     }

@@ -1,7 +1,7 @@
 import { ProgressBar } from 'primereact/progressbar';
 
 import { Card } from 'primereact/card';
-export default function TestProgress({part, whole} : {part: number, whole: number}) {
+export default function QuizProgress({part, whole} : {part: number, whole: number}) {
     const valueTemplate = (value: number) => {
         return (
             <>

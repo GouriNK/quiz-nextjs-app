@@ -44,7 +44,7 @@ export const authOptions: NextAuthOptions = {
     pages: {
         error: '/auth/login-error',
         signIn: '/auth/login',
-        signOut: '/quiz/home',  // Redirect to after sign out
+        signOut: '/quiz',  // Redirect to after sign out
     },
     callbacks: {
         async signIn({ user, account, profile }) {
@@ -57,8 +57,8 @@ export const authOptions: NextAuthOptions = {
             }
         },
         async redirect({ url, baseUrl }) {
-            // Redirect users to /quiz/home after successful login
-            return '/quiz/home';
+            // Redirect users to /quiz after successful login
+            return '/quiz';
         },
     }
 };

@@ -1,6 +1,6 @@
 'use client';
 
-import QuestionForm from "@/app/components/quiz/question-form";
+import QuestionForm from "@/app/components/question/QuestionForm";
 import { QuestionType } from "@/app/lib/definitions";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
@@ -44,7 +44,7 @@ export default function Page() {
     if (response.ok) {
       console.log(response);
       console.log('Question created successfully');
-      router.push('/quiz/all/view');
+      router.push('/question/view/all');
     } else {
       console.error('Failed to create question');
     }

@@ -59,7 +59,7 @@ export default function Page({ params }: { params: { domain: string } }) {
     const actionTemplate = (rowData: QuestionType) => {
       return (
         <>
-          <Link href={`/quiz/question/${rowData.id}/edit`} className="p-button-rounded p-button-success p-mr-2">
+          <Link href={`/question/edit/${rowData.id}`} className="p-button-rounded p-button-success p-mr-2">
              Edit
           </Link>
           <Button
@@ -74,7 +74,7 @@ export default function Page({ params }: { params: { domain: string } }) {
 
     return (
       <div style={{ margin: '40px auto', width: '1000px'}}>
-        <Link href={`/quiz/question/create`} className="p-button font-bold">
+        <Link href={`/question/create`} className="p-button font-bold">
                         {'Create a new Question'}
                   </Link>
         <DataTable value={questions} responsiveLayout="scroll">
