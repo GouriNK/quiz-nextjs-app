@@ -46,21 +46,18 @@ export default function Navbar() {
         //     url: '/'
         // },
         {
-            label: 'Quiz Domains',
-            icon: 'pi pi-home',
+            label: 'Quiz',
             url: '/quiz',
             className: activePath === '/quiz' ? 'active-menuitem' : ''
         },
         {
-            label: 'View All Questions',
-            icon: 'pi pi-star',
+            label: 'All Questions',
             visible: status === "authenticated"  ? true : false,
             url: '/question/view/all',
             className: activePath === '/question/view/all' ? 'active-menuitem' : ''
         },
         {
             label: 'Logout',
-            icon: 'pi pi-star',
             visible: status === "authenticated"  ? true : false,
             command: () => {
                 signOutOfApp();
@@ -68,48 +65,11 @@ export default function Navbar() {
         },
         {
             label: 'Login',
-            icon: 'pi pi-star',
             visible: status === "unauthenticated"  ? true : false,
             command: () => {
                 signIntoApp();
             }
-        },
-        // {
-        //     label: 'Projects',
-        //     icon: 'pi pi-search',
-        //     items: [
-        //         {
-        //             label: 'Components',
-        //             icon: 'pi pi-bolt'
-        //         },
-        //         {
-        //             label: 'Blocks',
-        //             icon: 'pi pi-server'
-        //         },
-        //         {
-        //             label: 'UI Kit',
-        //             icon: 'pi pi-pencil'
-        //         },
-                // {
-                //     label: 'Templates',
-                //     icon: 'pi pi-palette',
-                //     items: [
-                //         {
-                //             label: 'Apollo',
-                //             icon: 'pi pi-palette'
-                //         },
-                //         {
-                //             label: 'Ultima',
-                //             icon: 'pi pi-palette'
-                //         }
-                //     ]
-                // }
-            // ]
-        // },
-        // {
-        //     label: 'Contact',
-        //     icon: 'pi pi-envelope'
-        // }
+        }
     ];
     return (
         <div className="card">
