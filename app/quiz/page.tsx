@@ -18,10 +18,10 @@ useEffect(() => {
   }, []);
 
 return (
-    <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
-        <div style={{ display: 'flex', gap: '20px' }}>
+    <div>
+        <div>
             {domains.map((domain, index) => (
-                <Card key={index} title={domain.label} subTitle={domain.label} style={{ flex: 1 }}>
+                <Card key={index} title={domain.label} subTitle={domain.label}>
                     <p>{domain.label}</p>
                     <Link href={`/quiz/test/${domain.value}`} className="p-button font-bold">
                         {'Go'}

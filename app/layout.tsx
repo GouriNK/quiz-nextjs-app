@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { PrimeReactProvider, PrimeReactContext } from 'primereact/api';
+import { PrimeReactProvider } from 'primereact/api';
 import { Inter } from "next/font/google";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import AuthProvider from "./components/AuthProvider";
 import Navbar from "./components/Navbar";
+import styles from "./page.module.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,11 +20,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body >
         <PrimeReactProvider>
           <AuthProvider>
           <Navbar />
+          <div className={styles.main}>
             {children}
+          </div>
           </AuthProvider>
         </PrimeReactProvider>
       </body>
